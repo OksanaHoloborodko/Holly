@@ -20,53 +20,49 @@
             <button class="tab__button">Holiday date</button>
         </div>
         <div class="settings">
-            <div>
-                <img>
+            <div class="title-form">
+                <img src="assets/icon-settings.svg" alt="settings-icon">
                 <span>Settings</span>
             </div>
-            <label for="startDate">Start date</label>
-            <input type="date" id="startDate" name="startDate"><br>
-
-            <label for="endDate">End date</label>
-            <input type="date" id="endDate" name="endDate"><br>
-
-            <button class="preset__button">Week</button>
-            <button class="preset__button">Month</button>
-
-            <label for="selectDays">Select days</label>
-            <select id="selectDays" name="selectDays">
-                <option value="All days" selected>All days</option>
-                <option value="Weekdays">Weekdays</option>
-                <option value="Weekends">Weekends</option>
-            </select>
-
-            <label for="selectUnits">Select units</label>
-            <select id="selectUnits" name="selectUnits">
-                <option value="Days">Days</option>
-                <option value="Hours">Hours</option>
-                <option value="Minutes">Minutes</option>
-                <option value="Seconds">Seconds</option>
-            </select><br>
-
-            <button class="count__button">Count</button>
+            <div class="input-date">
+                <label for="startDate">Start date</label>
+                <input type="date" id="startDate" name="startDate"><br>
+    
+                <label for="endDate">End date</label>
+                <input type="date" id="endDate" name="endDate"><br>
+            </div>
+            <div class="preset">
+                <button class="preset__button">Week</button>
+                <button class="preset__button">Month</button>
+            </div>
+            <div class="select-options">
+                <label for="selectDays">Select days</label>
+                <select id="selectDays" name="selectDays">
+                    <option value="All days" selected>All days</option>
+                    <option value="Weekdays">Weekdays</option>
+                    <option value="Weekends">Weekends</option>
+                </select>
+    
+                <label for="selectUnits">Select units</label>
+                <select id="selectUnits" name="selectUnits">
+                    <option value="Days">Days</option>
+                    <option value="Hours">Hours</option>
+                    <option value="Minutes">Minutes</option>
+                    <option value="Seconds">Seconds</option>
+                </select><br>
+            </div>
+            <div class="count">
+                <button class="count__button">Count</button>
+            </div>
         </div>
-        <div class="result">
-            <div>
-                <img>
+        <div class="result result_active">
+            <div class="title-form">
+                <img src="assets/icon-check.svg" alt="result-icon">
                 <span>Result</span>
             </div>
-            <div class="result__text"></div>
-            <h2>Previous results</h2>
-            <table>
-                <tr>
-                    <th>Date range</th>
-                    <th>Result</th>
-                </tr>
-            </table>
+            <div class="result__text">
+            </div>
         </div>
     </main>
-    <footer>
-        <p>Copyright © 2023 Holly. All Rights Reserved.</p>
-    </footer>
 </body>
 </html>
