@@ -274,3 +274,59 @@ main {
         font-size: 2rem;
     }
 }
+
+@media screen and (max-width: 950px) {
+    body {
+        padding: 0 1rem 0;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    header {
+        max-width: 800px;
+    }
+    
+    main {
+        max-width: 800px;
+    }
+    
+    .input-date {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .input-date label {
+        margin-bottom: 1rem;
+    }
+    
+    .preset {
+        margin: 0.5rem 0;
+    }
+    
+    .preset__button {
+        padding: 0.5rem 2.5rem;
+        margin-right: 1rem;
+    }
+    
+    .select-options {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 2.5rem 0 0rem;
+    }
+    
+    .select-options label {
+        margin-bottom: 1rem;
+    }
+    
+    .select-options select {
+        margin-bottom: 2.5rem;
+    }
+    
+    .result__text > p {
+        word-break: break-all;
+        max-width: 250px;
+        font-size: 1.8rem;
+    }
+}
