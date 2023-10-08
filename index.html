@@ -19,49 +19,55 @@
             <button class="tab__button tab__button_active">Date range</button>
             <button class="tab__button">Holiday date</button>
         </div>
-        <div class="settings">
-            <div class="title-form">
-                <img src="assets/icon-settings.svg" alt="settings-icon">
-                <span>Settings</span>
+        <div class="tab-date">
+            <div class="settings">
+                <div class="title-form">
+                    <img src="assets/icon-settings.svg" alt="settings-icon">
+                    <span>Settings</span>
+                </div>
+                <div class="input-date">
+                    <label for="startDate">Start date</label>
+                    <input type="date" id="startDate" name="startDate"><br>
+        
+                    <label for="endDate">End date</label>
+                    <input type="date" id="endDate" name="endDate"><br>
+                </div>
+                <div class="preset">
+                    <button class="preset__button">Week</button>
+                    <button class="preset__button">Month</button>
+                </div>
+                <div class="select-options">
+                    <label for="selectDays">Select days</label>
+                    <select id="selectDays" name="selectDays">
+                        <option value="All days" selected>All days</option>
+                        <option value="Weekdays">Weekdays</option>
+                        <option value="Weekends">Weekends</option>
+                    </select>
+        
+                    <label for="selectUnits">Select units</label>
+                    <select id="selectUnits" name="selectUnits">
+                        <option value="Days">Days</option>
+                        <option value="Hours">Hours</option>
+                        <option value="Minutes">Minutes</option>
+                        <option value="Seconds">Seconds</option>
+                    </select><br>
+                </div>
+                <div class="count">
+                    <button class="count__button">Count</button>
+                </div>
             </div>
-            <div class="input-date">
-                <label for="startDate">Start date</label>
-                <input type="date" id="startDate" name="startDate"><br>
-    
-                <label for="endDate">End date</label>
-                <input type="date" id="endDate" name="endDate"><br>
-            </div>
-            <div class="preset">
-                <button class="preset__button">Week</button>
-                <button class="preset__button">Month</button>
-            </div>
-            <div class="select-options">
-                <label for="selectDays">Select days</label>
-                <select id="selectDays" name="selectDays">
-                    <option value="All days" selected>All days</option>
-                    <option value="Weekdays">Weekdays</option>
-                    <option value="Weekends">Weekends</option>
-                </select>
-    
-                <label for="selectUnits">Select units</label>
-                <select id="selectUnits" name="selectUnits">
-                    <option value="Days">Days</option>
-                    <option value="Hours">Hours</option>
-                    <option value="Minutes">Minutes</option>
-                    <option value="Seconds">Seconds</option>
-                </select><br>
-            </div>
-            <div class="count">
-                <button class="count__button">Count</button>
+            <div class="result result_active">
+                <div class="title-form">
+                    <img src="assets/icon-check.svg" alt="result-icon">
+                    <span>Result</span>
+                </div>
+                <div class="result__text">
+                </div>
             </div>
         </div>
-        <div class="result result_active">
-            <div class="title-form">
-                <img src="assets/icon-check.svg" alt="result-icon">
-                <span>Result</span>
-            </div>
-            <div class="result__text">
-            </div>
+        <div class="tab-holiday" hidden>
+            <div class="settings"></div>
+            <div class="result result_active"></div>
         </div>
     </main>
 </body>
