@@ -131,6 +131,10 @@ main {
     margin-right: 5rem;
 }
 
+input[type="date"][disabled] {
+    opacity: 0.5;
+}
+
 .input-date input[type="date"]:focus {
     outline: none;
 }
