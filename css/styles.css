@@ -164,8 +164,8 @@ input[type="date"][disabled] {
 
 .preset__button:hover {
     background-color: var(--accent-second-color);
+    border: 0.15rem solid var(--accent-second-color);
     color: var(--font-second-color);
-    border: none;
 }
 
 .select-options {

@@ -5,6 +5,7 @@ const tabDate = document.querySelector('.tab-date');
 const tabHoliday = document.querySelector('.tab-holiday');
 const startDate = document.getElementById('startDate');
 const endDate = document.getElementById('endDate');
+const preset = document.querySelector('.preset');
 
 const changeTab = (event) => {
     const tabButtons = document.querySelectorAll('.tab__button');
@@ -50,6 +51,26 @@ const endtDateListener = () => {
     startDate.setAttribute('max', getNormalizeDate(endDateValue));
 };
 
+const choosePreset = (event) => {
+    const startDateValue = new Date(startDate.value);
+    const newEndDate = new Date(startDateValue);
+
+    if(event.target.textContent === 'Week') {
+        newEndDate.setDate(newEndDate.getDate() + 7);
+
+        const newEndDateValue = newEndDate.toISOString().split('T')[0];
+        
+        endDate.value = newEndDateValue;
+    } else if(event.target.textContent === 'Month') {
+        newEndDate.setDate(newEndDate.getDate() + 30);
+
+        const newEndDateValue = newEndDate.toISOString().split('T')[0];
+        
+        endDate.value = newEndDateValue;
+    }
+}
+
 tab.addEventListener('click', changeTab);
 startDate.addEventListener('input', startDateListener);
 endDate.addEventListener('input', endtDateListener);
+preset.addEventListener('click', choosePreset);
