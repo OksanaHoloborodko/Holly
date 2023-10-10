@@ -70,6 +70,42 @@ const choosePreset = (event) => {
     }
 }
 
+function isWeekend(date) {
+    const dayOfWeek = date.getDay();
+    return dayOfWeek === 0 || dayOfWeek === 6;
+}
+
+function countWeekends(startDate, endDate) {
+    let currentDate = new Date(startDate);
+    let finishDate = new Date(endDate);
+    let count = 0;
+
+    while (currentDate < finishDate) {
+        if(isWeekend(currentDate)) {
+            count++;
+        }
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return count;
+};
+
+function countWeekdays(startDate, endDate) {
+    let currentDate = new Date(startDate);
+    let finishDate = new Date(endDate);
+    let count = 0;
+
+    while (currentDate < finishDate) {
+        if(!isWeekend(currentDate)) {
+            count++;
+        }
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return count;
+};
+
+
 tab.addEventListener('click', changeTab);
 startDate.addEventListener('input', startDateListener);
 endDate.addEventListener('input', endtDateListener);
