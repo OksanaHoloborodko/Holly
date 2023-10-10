@@ -64,7 +64,7 @@ const choosePreset = (event) => {
         
         endDate.value = newEndDateValue;
     } else if(event.target.textContent === 'Month') {
-        newEndDate.setDate(newEndDate.getDate() + 30);
+        newEndDate.setMonth(newEndDate.getMonth() + 1);
 
         const newEndDateValue = newEndDate.toISOString().split('T')[0];
         
