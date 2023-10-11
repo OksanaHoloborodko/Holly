@@ -8,6 +8,28 @@ const endDate = document.getElementById('endDate');
 const preset = document.querySelector('.preset');
 const countBtn = document.querySelector('.count__button');
 const resultText = document.querySelector('.result__text');
+const resultHistory = document.querySelector('.result-history');
+const resultBlock = document.querySelector('.result-date');
+
+const STORAGE_KEY = "resultHistory";
+
+const getResultsFromStorage = () => {
+    const results = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    return results;
+}
+
+const setResultsToStorage = (result) => {
+    const results = getResultsFromStorage();
+
+    if(results.length === 10) {
+        results.shift();
+        results.push(result);
+    } else {
+        results.push(result);
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
+}
 
 const changeTab = (event) => {
     const tabButtons = document.querySelectorAll('.tab__button');
@@ -67,7 +89,7 @@ const choosePreset = (event) => {
         newEndDate.setMonth(newEndDate.getMonth() + 1);
 
         const newEndDateValue = newEndDate.toISOString().split('T')[0];
-        
+
         endDate.value = newEndDateValue;
     }
 }
@@ -111,6 +133,29 @@ function normalizeDimension(result, dimension) {
     return result == 1 ? dimension.slice(0, -1).toLowerCase() : dimension.toLowerCase();
 }
 
+const getResults = () => {
+    const results = getResultsFromStorage();
+
+    if(results.length !== 0) {
+        resultBlock.classList.remove('result');
+    }
+
+    results.forEach((result) => {
+        const li = document.createElement("li");
+        li.className = 'result-value';
+
+        const spanDate = document.createElement("span");
+        spanDate.textContent = result.dateRange;
+        li.append(spanDate);
+
+        const spanResult = document.createElement("span");
+        spanResult.textContent = result.result;
+        li.append(spanResult);
+
+        resultHistory.append(li);
+    });
+}
+
 const durationBetweenDates = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
@@ -148,24 +193,39 @@ const durationBetweenDates = () => {
         break;
      }
 
-     if(isNaN(result)) {
+    if(isNaN(result)) {
         return;
-     }
+    } else {
+        let paragraph = resultText.querySelector("p");
 
-     let paragraph = resultText.querySelector("p");
-
-     if(!paragraph) {
+    if(!paragraph) {
         paragraph = document.createElement('p');
         paragraph.textContent = `${result} ${normalizeDimension(result, dimension)}`;
         resultText.appendChild(paragraph);
 
-        const resultBlock = document.querySelector('.result-date');
         resultBlock.classList.remove('result');
-     } else {
+    } else {
         paragraph.textContent = `${result} ${normalizeDimension(result, dimension)}`;
-     }
+    }
+
+    const li = document.createElement("li");
+        li.className = 'result-value';
+
+        const spanDate = document.createElement("span");
+        spanDate.textContent = `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`;
+        li.append(spanDate);
+
+        const spanResult = document.createElement("span");
+        spanResult.textContent = paragraph.textContent;
+        li.append(spanResult);
+
+        resultHistory.append(li);
+
+    setResultsToStorage({dateRange: spanDate.textContent, result: paragraph.textContent});
+    }
 }
 
+getResults();
 
 tab.addEventListener('click', changeTab);
 startDate.addEventListener('input', startDateListener);

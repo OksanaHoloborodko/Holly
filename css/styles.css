@@ -240,6 +240,45 @@ input[type="date"][disabled] {
     font-weight: 700;
 }
 
+h2 {
+    text-align: center;
+    font-family: var(--main-font);
+    font-size: 1.8rem;
+    color: var(--accent-primary-color);
+    margin: 2rem 0;
+}
+
+.result-header > span {
+    font-family: var(--main-font);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--font-primary-color);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.result-value > span {
+    font-family: var(--main-font);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--font-primary-color);
+}
+
+.result-value {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 0.5rem 0;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+}
+
+.result-value span {
+    flex: 1;
+  }
+
 @media screen and (max-width: 1300px) {
     header {
         max-width: 900px;
