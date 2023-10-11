@@ -222,8 +222,21 @@ input[type="date"][disabled] {
     cursor: pointer;
 }
 
+.count__button[disabled] {
+    background-color: var(--font-primary-color);
+    border: 0.15rem solid var(--font-primary-color);
+    opacity: 0.9;
+}
+
+.count__button[disabled]:hover {
+    background-color: var(--font-primary-color);
+    border: 0.15rem solid var(--font-primary-color);
+    opacity: 0.9;
+}
+
 .count__button:hover {
     background-color: var(--accent-second-color);
+    border: 0.15rem solid var(--accent-second-color);
 }
 
 .result__text {

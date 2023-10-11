@@ -73,6 +73,7 @@ const endtDateListener = () => {
     const endDateValue = new Date(endDate.value);
 
     startDate.setAttribute('max', getNormalizeDate(endDateValue));
+    countBtn.removeAttribute("disabled");
 };
 
 const choosePreset = (event) => {
@@ -213,12 +214,9 @@ const durationBetweenDates = () => {
         case 'Seconds':
             result = durationDays * SECONDS_IN_DAY;
         break;
-     }
+    }
 
-    if(isNaN(result)) {
-        return;
-    } else {
-        let paragraph = resultText.querySelector("p");
+    let paragraph = resultText.querySelector("p");
 
     if(!paragraph) {
         paragraph = document.createElement('p');
@@ -232,7 +230,6 @@ const durationBetweenDates = () => {
 
     createResultTable(startDateValue, endDateValue, paragraph.textContent);
     setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: paragraph.textContent});
-    }
 }
 
 getResults();
