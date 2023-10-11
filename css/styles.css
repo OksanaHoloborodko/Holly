@@ -34,6 +34,7 @@ header {
 }
 
 h1 {
+    text-align: center;
     font-family: var(--logo-font);
     font-size: 4rem;
     letter-spacing: 0.1em;
@@ -246,6 +247,10 @@ input[type="date"][disabled] {
     padding: 0.5rem;
 }
 
+.result__text:has(p) {
+    background-color: var(--background-color);
+}
+
 .result__text > p {
     font-family: var(--main-font);
     color: var(--accent-primary-color);
@@ -384,5 +389,21 @@ h2 {
         word-break: break-all;
         max-width: 250px;
         font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+        margin: 1rem 0;
+    }
+
+    .result-header > span {
+        font-size: 1.4rem;
+    }
+    
+    .result-value {
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0.7rem 0;
+        word-wrap: ' ';
     }
 }
