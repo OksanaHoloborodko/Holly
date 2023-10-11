@@ -22,10 +22,10 @@ const setResultsToStorage = (result) => {
     const results = getResultsFromStorage();
 
     if(results.length === 10) {
-        results.shift();
-        results.push(result);
+        results.pop();
+        results.unshift(result);
     } else {
-        results.push(result);
+        results.unshift(result);
     }
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
@@ -156,6 +156,28 @@ const getResults = () => {
     });
 }
 
+const createResultTable = (startDateValue, endDateValue, result) => {
+    const maxLiElements = 11;
+    let currentLiElements = resultHistory.getElementsByTagName('li').length;
+
+    if (currentLiElements >= maxLiElements) {
+        resultHistory.removeChild(resultHistory.lastElementChild);
+    }
+
+    const li = document.createElement("li");
+    li.className = 'result-value';
+
+    const spanDate = document.createElement("span");
+    spanDate.textContent = `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`;
+    li.append(spanDate);
+
+    const spanResult = document.createElement("span");
+    spanResult.textContent = result;
+    li.append(spanResult);
+
+    resultHistory.insertBefore(li, resultHistory.children[1]);
+}
+
 const durationBetweenDates = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
@@ -208,20 +230,8 @@ const durationBetweenDates = () => {
         paragraph.textContent = `${result} ${normalizeDimension(result, dimension)}`;
     }
 
-    const li = document.createElement("li");
-        li.className = 'result-value';
-
-        const spanDate = document.createElement("span");
-        spanDate.textContent = `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`;
-        li.append(spanDate);
-
-        const spanResult = document.createElement("span");
-        spanResult.textContent = paragraph.textContent;
-        li.append(spanResult);
-
-        resultHistory.append(li);
-
-    setResultsToStorage({dateRange: spanDate.textContent, result: paragraph.textContent});
+    createResultTable(startDateValue, endDateValue, paragraph.textContent);
+    setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: paragraph.textContent});
     }
 }
 
