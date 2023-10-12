@@ -93,6 +93,8 @@ const choosePreset = (event) => {
 
         endDate.value = newEndDateValue;
     }
+
+    countBtn.removeAttribute("disabled");
 }
 
 function isWeekend(date) {
