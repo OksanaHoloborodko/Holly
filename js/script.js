@@ -23,10 +23,9 @@ const setResultsToStorage = (result) => {
 
     if(results.length === 10) {
         results.pop();
-        results.unshift(result);
-    } else {
-        results.unshift(result);
     }
+
+    results.unshift(result);
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
 }
