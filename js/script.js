@@ -80,13 +80,15 @@ const choosePreset = (event) => {
     const startDateValue = new Date(startDate.value);
     const newEndDate = new Date(startDateValue);
 
-    if(event.target.textContent === 'Week') {
+    const preset = event.target.dataset.preset;
+
+    if(preset === 'week') {
         newEndDate.setDate(newEndDate.getDate() + 7);
 
         const newEndDateValue = newEndDate.toISOString().split('T')[0];
         
         endDate.value = newEndDateValue;
-    } else if(event.target.textContent === 'Month') {
+    } else if(preset === 'month') {
         newEndDate.setMonth(newEndDate.getMonth() + 1);
 
         const newEndDateValue = newEndDate.toISOString().split('T')[0];
