@@ -182,57 +182,68 @@ const createResultTable = (startDateValue, endDateValue, result) => {
     resultHistory.insertBefore(li, resultHistory.children[1]);
 }
 
-const durationBetweenDates = () => {
-    const startDateValue = new Date(startDate.value);
-    const endDateValue = new Date(endDate.value);
-    const dayOption = document.getElementById('selectDays').value;
-    const dimension = document.getElementById('selectUnits').value;
-    let durationDays;
-
+function getDurationBetweenTimes(startDateValue, endDateValue, dayOption, dimension) {
     const DAY_IN_MILLISECONDS = 86400000;
     const HOURS_IN_DAY = 24;
     const MINUTES_IN_DAY = 1440;
     const SECONDS_IN_DAY = 86400;
 
-    if(dayOption === 'All days') {
+    let durationDays;
+
+    if(dayOption === 'all days') {
         durationDays = (endDateValue - startDateValue) / DAY_IN_MILLISECONDS;
-    } else if (dayOption === 'Weekdays') {
+    } else if (dayOption === 'weekdays') {
         durationDays = countWeekdays(startDateValue, endDateValue);
-    } else if (dayOption === 'Weekends') {
+    } else if (dayOption === 'weekends') {
         durationDays = countWeekends(startDateValue, endDateValue);
     }
 
     let result;
 
     switch (dimension) {
-        case 'Days':
+        case 'days':
             result = durationDays;
-        break;
-        case 'Hours':
+            break;
+        case 'hours':
             result = durationDays * HOURS_IN_DAY;
-        break;
-        case 'Minutes':
+            break;
+        case 'minutes':
             result = durationDays * MINUTES_IN_DAY;
-        break;
-        case 'Seconds':
+            break;
+        case 'seconds':
             result = durationDays * SECONDS_IN_DAY;
-        break;
+            break;
     }
+
+    return `${result} ${normalizeDimension(result, dimension)}`;
+}
+
+function showDurationResults(startDateValue, endDateValue, dayOption, dimension) {
+    const resultStr = getDurationBetweenTimes(startDateValue, endDateValue, dayOption, dimension);
 
     let paragraph = resultText.querySelector("p");
 
     if(!paragraph) {
         paragraph = document.createElement('p');
-        paragraph.textContent = `${result} ${normalizeDimension(result, dimension)}`;
+        paragraph.textContent = resultStr;
         resultText.appendChild(paragraph);
 
         resultBlock.classList.remove('result');
     } else {
-        paragraph.textContent = `${result} ${normalizeDimension(result, dimension)}`;
+        paragraph.textContent = resultStr;
     }
 
-    createResultTable(startDateValue, endDateValue, paragraph.textContent);
-    setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: paragraph.textContent});
+    createResultTable(startDateValue, endDateValue, resultStr);
+    setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: resultStr});
+}
+
+const durationBetweenDates = () => {
+    const startDateValue = new Date(startDate.value);
+    const endDateValue = new Date(endDate.value);
+    const dayOption = document.getElementById('selectDays').value;
+    const dimension = document.getElementById('selectUnits').value;
+
+    showDurationResults(startDateValue, endDateValue, dayOption, dimension);
 }
 
 getResults();
