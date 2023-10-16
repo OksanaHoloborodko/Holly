@@ -58,7 +58,7 @@ function getNormalizeDate(date) {
     return `${year}-${month}-${day}`;
 }
 
-const startDateListener = () => {
+const handleStartDateChange = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
 
@@ -67,7 +67,7 @@ const startDateListener = () => {
     endDate.removeAttribute('disabled');
 };
 
-const endtDateListener = () => {
+const handleEndDateChange = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
 
@@ -190,7 +190,7 @@ function getDurationBetweenTimes(startDateValue, endDateValue, dayOption, dimens
 
     let durationDays;
 
-    if(dayOption === 'all days') {
+    if(dayOption === 'all') {
         durationDays = (endDateValue - startDateValue) / DAY_IN_MILLISECONDS;
     } else if (dayOption === 'weekdays') {
         durationDays = countWeekdays(startDateValue, endDateValue);
@@ -237,7 +237,7 @@ function showDurationResults(startDateValue, endDateValue, dayOption, dimension)
     setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: resultStr});
 }
 
-const durationBetweenDates = () => {
+const showResults = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
     const dayOption = document.getElementById('selectDays').value;
@@ -249,8 +249,8 @@ const durationBetweenDates = () => {
 getResults();
 
 tab.addEventListener('click', changeTab);
-startDate.addEventListener('input', startDateListener);
-endDate.addEventListener('input', endtDateListener);
+startDate.addEventListener('input', handleStartDateChange);
+endDate.addEventListener('input', handleEndDateChange);
 preset.addEventListener('click', choosePreset);
-countBtn.addEventListener('click', durationBetweenDates);
+countBtn.addEventListener('click', showResults);
 
