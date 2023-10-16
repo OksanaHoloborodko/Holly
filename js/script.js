@@ -28,6 +28,8 @@ const setResultsToStorage = (result) => {
     results.unshift(result);
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
+
+    getResults();
 }
 
 const changeTab = (event) => {
@@ -140,7 +142,9 @@ function normalizeDimension(result, dimension) {
 const getResults = () => {
     const results = getResultsFromStorage();
 
-    if(results.length !== 0) {
+    resultHistory.innerHTML = '';
+
+    if (results.length !== 0) {
         resultBlock.classList.remove('result');
     }
 
@@ -156,30 +160,8 @@ const getResults = () => {
         spanResult.textContent = result.result;
         li.append(spanResult);
 
-        resultHistory.append(li);
+        resultHistory.appendChild(li);
     });
-}
-
-const createResultTable = (startDateValue, endDateValue, result) => {
-    const maxLiElements = 11;
-    let currentLiElements = resultHistory.getElementsByTagName('li').length;
-
-    if (currentLiElements >= maxLiElements) {
-        resultHistory.removeChild(resultHistory.lastElementChild);
-    }
-
-    const li = document.createElement("li");
-    li.className = 'result-value';
-
-    const spanDate = document.createElement("span");
-    spanDate.textContent = `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`;
-    li.append(spanDate);
-
-    const spanResult = document.createElement("span");
-    spanResult.textContent = result;
-    li.append(spanResult);
-
-    resultHistory.insertBefore(li, resultHistory.children[1]);
 }
 
 function getDurationBetweenTimes(startDateValue, endDateValue, dayOption, dimension) {
@@ -233,7 +215,6 @@ function showDurationResults(startDateValue, endDateValue, dayOption, dimension)
         paragraph.textContent = resultStr;
     }
 
-    createResultTable(startDateValue, endDateValue, resultStr);
     setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: resultStr});
 }
 
@@ -253,4 +234,3 @@ startDate.addEventListener('input', handleStartDateChange);
 endDate.addEventListener('input', handleEndDateChange);
 preset.addEventListener('click', choosePreset);
 countBtn.addEventListener('click', showResults);
-
