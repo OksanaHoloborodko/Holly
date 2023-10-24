@@ -1,56 +1,12 @@
-'use strict';
+import { getResultsFromStorage, setResultsToStorage } from './storage.js';
 
-const tab = document.querySelector('.tab');
-const tabDate = document.querySelector('.tab-date');
-const tabHoliday = document.querySelector('.tab-holiday');
-const startDate = document.getElementById('startDate');
-const endDate = document.getElementById('endDate');
-const preset = document.querySelector('.preset');
-const countBtn = document.querySelector('.count__button');
+export const startDate = document.getElementById('startDate');
+export const endDate = document.getElementById('endDate');
+export const preset = document.querySelector('.preset');
+export const countBtn = document.querySelector('.count__button');
 const resultText = document.querySelector('.result__text');
 const resultHistory = document.querySelector('.result-history');
 const resultBlock = document.querySelector('.result-date');
-
-const STORAGE_KEY = "resultHistory";
-
-const getResultsFromStorage = () => {
-    const results = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    return results;
-}
-
-const setResultsToStorage = (result) => {
-    const results = getResultsFromStorage();
-
-    if(results.length === 10) {
-        results.pop();
-    }
-
-    results.unshift(result);
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
-
-    getResults();
-}
-
-const changeTab = (event) => {
-    const tabButtons = document.querySelectorAll('.tab__button');
-
-    if(event.target.className.includes('tab__button_active')) {
-        return;
-    }
-
-    tabButtons.forEach((tabButton) => {
-        tabButton.classList.toggle('tab__button_active');
-    });
-
-    if(event.target.textContent === 'Date range') {
-        tabDate.hidden = false;
-        tabHoliday.hidden = true;
-    } else if(event.target.textContent === 'Holiday date') {
-        tabDate.hidden = true;
-        tabHoliday.hidden = false;
-    }
-};
 
 function getNormalizeDate(date) {
     const year = date.getFullYear();
@@ -60,7 +16,7 @@ function getNormalizeDate(date) {
     return `${year}-${month}-${day}`;
 }
 
-const handleStartDateChange = () => {
+export const handleStartDateChange = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
 
@@ -69,7 +25,7 @@ const handleStartDateChange = () => {
     endDate.removeAttribute('disabled');
 };
 
-const handleEndDateChange = () => {
+export const handleEndDateChange = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
 
@@ -77,7 +33,7 @@ const handleEndDateChange = () => {
     countBtn.removeAttribute("disabled");
 };
 
-const choosePreset = (event) => {
+export const choosePreset = (event) => {
     const startDateValue = new Date(startDate.value);
     const newEndDate = new Date(startDateValue);
 
@@ -139,7 +95,7 @@ function normalizeDimension(result, dimension) {
     return result == 1 ? dimension.slice(0, -1).toLowerCase() : dimension.toLowerCase();
 }
 
-const getResults = () => {
+export const getResults = () => {
     const results = getResultsFromStorage();
 
     resultHistory.innerHTML = '';
@@ -218,7 +174,7 @@ function showDurationResults(startDateValue, endDateValue, dayOption, dimension)
     setResultsToStorage({dateRange: `${getNormalizeDate(startDateValue)} - ${getNormalizeDate(endDateValue)}`, result: resultStr});
 }
 
-const showResults = () => {
+export const showResults = () => {
     const startDateValue = new Date(startDate.value);
     const endDateValue = new Date(endDate.value);
     const dayOption = document.getElementById('selectDays').value;
@@ -226,11 +182,3 @@ const showResults = () => {
 
     showDurationResults(startDateValue, endDateValue, dayOption, dimension);
 }
-
-getResults();
-
-tab.addEventListener('click', changeTab);
-startDate.addEventListener('input', handleStartDateChange);
-endDate.addEventListener('input', handleEndDateChange);
-preset.addEventListener('click', choosePreset);
-countBtn.addEventListener('click', showResults);
