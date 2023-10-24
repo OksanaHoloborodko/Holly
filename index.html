@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holly</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script defer src="./js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./assets/favicon.png" sizes="16x16">
+</head>
+<body>
+    <header>
+        <h1>Holly</h1>
+    </header>
+    <main>
+        <div class="tab">
+            <button class="tab__button tab__button_active">Date range</button>
+            <button class="tab__button">Holiday date</button>
+        </div>
+        <div class="tab-date">
+            <div class="settings">
+                <div class="title-form">
+                    <img src="assets/icon-settings.svg" alt="settings-icon">
+                    <span>Settings</span>
+                </div>
+                <div class="input-date">
+                    <label for="startDate">Start date</label>
+                    <input type="date" id="startDate" name="startDate"><br>
+        
+                    <label for="endDate">End date</label>
+                    <input type="date" id="endDate" name="endDate" disabled><br>
+                </div>
+                <div class="preset">
+                    <button class="preset__button" data-preset="week">Week</button>
+                    <button class="preset__button" data-preset="month">Month</button>
+                </div>
+                <div class="select-options">
+                    <label for="selectDays">Select days</label>
+                    <select id="selectDays" name="selectDays">
+                        <option value="all" selected>All days</option>
+                        <option value="weekdays">Weekdays</option>
+                        <option value="weekends">Weekends</option>
+                    </select>
+        
+                    <label for="selectUnits">Select units</label>
+                    <select id="selectUnits" name="selectUnits">
+                        <option value="days">Days</option>
+                        <option value="hours">Hours</option>
+                        <option value="minutes">Minutes</option>
+                        <option value="seconds">Seconds</option>
+                    </select><br>
+                </div>
+                <div class="count">
+                    <button class="count__button" disabled>Count</button>
+                </div>
+            </div>
+            <div class="result result-date result_active">
+                <div class="title-form">
+                    <img src="assets/icon-check.svg" alt="result-icon">
+                    <span>Result</span>
+                </div>
+                <div class="result__text">
+                </div>
+                <h2>Previous results</h2>
+                <div class="result-header">
+                    <span>Date range</span>
+                    <span>Result</span>
+                </div>
+                <ul class="result-history">
+                </ul>
+            </div>
+        </div>
+        <div class="tab-holiday" hidden>
+            <div class="settings"></div>
+            <div class="result result-holiday result_active"></div>
+        </div>
+    </main>
+</body>
+</html>
