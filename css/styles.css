@@ -197,7 +197,7 @@ input[type="date"][disabled] {
     padding: 0.8rem;
     margin-bottom: 1.5rem;
     width: 100%;
-    flex: 3;
+    flex: 2.5;
     margin-right: 5rem;
     text-indent: 0.5rem;
 }
@@ -296,7 +296,11 @@ h2 {
 
 .result-value span {
     flex: 1;
-  }
+}
+
+.select-options_holidays {
+    margin: 0 0;
+}
 
 @media screen and (max-width: 1300px) {
     header {
@@ -334,6 +338,10 @@ h2 {
     
     .result__text > p {
         font-size: 2rem;
+    }
+
+    .select-options_holidays {
+        margin: 0 0;
     }
 }
 
@@ -406,5 +414,9 @@ h2 {
         gap: 1.5rem;
         padding: 0.7rem 0;
         word-wrap: ' ';
+    }
+
+    .select-options_holidays {
+        margin: 0 0;
     }
 }
