@@ -54,7 +54,7 @@
                     </select><br>
                 </div>
                 <div class="count">
-                    <button class="count__button" disabled>Count</button>
+                    <button class="count__button" disabled>COUNT</button>
                 </div>
             </div>
             <div class="result result-date result_active">
@@ -82,14 +82,32 @@
                 <div class="select-options select-options_holidays">
                     <label for="selectCountry">Select country</label>
                     <select id="selectCountry" name="selectCountry">
+                        <option value="" selected disabled></option>
                     </select>
         
                     <label for="selectYear">Select year</label>
                     <select id="selectYear" name="selectYear" disabled>
                     </select><br>
                 </div>
+                <div class="show">
+                    <button class="show__button" disabled>SHOW</button>
+                </div>       
             </div>
-            <div class="result result-holiday result_active"></div>
+            <div class="result result-holiday result_active">
+                <div class="title-form">
+                    <img src="assets/icon-check.svg" alt="result-icon">
+                    <span>Result</span>
+                </div>
+                <div class="result-header">
+                    <div class="result__date">
+                        <span>Date</span>
+                        <span class="arrow" data-direction="<"></span>
+                    </div>
+                    <span>Holiday</span>
+                </div>
+                <ul class="result-holidays">
+                </ul>
+            </div>
         </div>
     </main>
 </body>

@@ -1,5 +1,6 @@
 import { getResultsFromStorage, setResultsToStorage } from './storage.js';
 import { getNormalizeDate, addWeek, addMonth, getDurationBetweenTimes } from './date.js';
+import { getCountries, getHolidays, holidaysData } from './requests.js';
 
 const startDate = document.getElementById('startDate');
 const endDate = document.getElementById('endDate');
@@ -11,6 +12,12 @@ const resultBlock = document.querySelector('.result-date');
 const tab = document.querySelector('.tab');
 const tabDate = document.querySelector('.tab-date');
 const tabHoliday = document.querySelector('.tab-holiday');
+const countriesList = document.getElementById('selectCountry');
+const yearsList = document.getElementById('selectYear');
+const showBtn = document.querySelector('.show__button');
+const sortBtn = document.querySelector('.arrow');
+const sortDate = document.querySelector('.result__date');
+const resultHolidays = document.querySelector('.result-holidays');
 
 const changeTab = (event) => {
     const tabButtons = document.querySelectorAll('.tab__button');
@@ -117,10 +124,80 @@ const showResults = () => {
     showDurationResults(startDateValue, endDateValue, dayOption, dimension);
 }
 
+const selectCountry = () => {
+    yearsList.removeAttribute('disabled');
+    showBtn.removeAttribute("disabled");
+}
+
+const renderYearsList = () => {
+    const defaultYear = (new Date()).getFullYear();
+
+    for(let year = 2001; year <= 2049; year++) {
+        const optionYear = document.createElement("option");
+        optionYear.text = year;
+        optionYear.value = year;
+
+        if (year === defaultYear) {
+            optionYear.selected = true;
+        }
+        yearsList.appendChild(optionYear);
+    }
+}
+
+const showHolidays = () => {
+    const countryValue = countriesList.value;
+    const yearValue = yearsList.value;
+
+    getHolidays(countryValue, yearValue);
+}
+
+function sortByDate(direction) {
+	if(direction === '>') {
+        return (a, b) => {
+            return (new Date(a.date)) - (new Date(b.date));
+        };
+    } else if(direction === '<') {
+        return (a, b) => {
+            return (new Date(b.date)) - (new Date(a.date));
+        };
+    }
+}
+
+const showSortedHolidays = () => {
+    const direction = sortBtn.getAttribute('data-direction');
+    sortBtn.setAttribute('data-direction', direction === '>' ? '<' : '>');
+
+    sortBtn.style.transform = direction === '<' ? 'rotate(180deg)' : 'rotate(0deg)';
+
+    holidaysData.sort(sortByDate(direction));
+
+    resultHolidays.innerHTML = '';
+
+    holidaysData.forEach(holiday => {
+        const li = document.createElement("li");
+        li.className = 'result-value';
+
+        const spanDate = document.createElement("span");
+        spanDate.textContent = holiday.date;
+        li.append(spanDate);
+
+        const spanHoliday = document.createElement("span");
+        spanHoliday.textContent = holiday.name;
+        li.append(spanHoliday);
+
+        resultHolidays.appendChild(li);
+    });
+}
+
 renderResults();
+getCountries();
+renderYearsList();
 
 tab.addEventListener('click', changeTab);
 startDate.addEventListener('input', handleStartDateChange);
 endDate.addEventListener('input', handleEndDateChange);
 preset.addEventListener('click', choosePreset);
 countBtn.addEventListener('click', showResults);
+countriesList.addEventListener('change', selectCountry);
+showBtn.addEventListener('click', showHolidays);
+sortDate.addEventListener('click', showSortedHolidays);
