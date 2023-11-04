@@ -147,6 +147,8 @@ const renderYearsList = () => {
 const showHolidays = () => {
     const countryValue = countriesList.value;
     const yearValue = yearsList.value;
+    sortBtn.setAttribute('data-direction', '<');
+    sortBtn.style = "";
 
     getHolidays(countryValue, yearValue);
 }
