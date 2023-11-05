@@ -18,6 +18,7 @@ const showBtn = document.querySelector('.show__button');
 const sortBtn = document.querySelector('.arrow');
 const sortDate = document.querySelector('.result__date');
 const resultHolidays = document.querySelector('.result-holidays');
+let isCountryLoad = false;
 
 const changeTab = (event) => {
     const tabButtons = document.querySelectorAll('.tab__button');
@@ -36,6 +37,10 @@ const changeTab = (event) => {
     } else if(event.target.textContent === 'Holiday date') {
         tabDate.hidden = true;
         tabHoliday.hidden = false;
+        if(!isCountryLoad) {
+            getCountries();
+        }
+        isCountryLoad = true;
     }
 };
 
@@ -192,7 +197,6 @@ const showSortedHolidays = () => {
 }
 
 renderResults();
-getCountries();
 renderYearsList();
 
 tab.addEventListener('click', changeTab);

@@ -1,4 +1,7 @@
 const countrySelect = document.getElementById("selectCountry");
+const errorPopup = document.querySelector('.error-popup');
+const closePopup = document.querySelector('.error-popup__close');
+const closePopupBtn = document.querySelector('.error-popup__link');
 export let holidaysData = [];
 
 export async function getCountries() {
@@ -18,6 +21,26 @@ export async function getCountries() {
         });
     } catch (error) {
         console.error(error);
+
+		errorPopup.style.opacity = 1;
+		errorPopup.style.visibility = "visible";
+
+		closePopup.addEventListener('click', () => {
+			errorPopup.style.opacity = 0;
+			errorPopup.style.visibility = "hidden";
+		});
+
+		closePopupBtn.addEventListener('click', () => {
+			errorPopup.style.opacity = 0;
+			errorPopup.style.visibility = "hidden";
+		});
+
+		errorPopup.addEventListener("click", (event) => {
+            if (event.target !== errorPopup) {
+                errorPopup.style.opacity = 0;
+                errorPopup.style.visibility = "hidden";
+            }
+        });
     }
 }
 
@@ -58,5 +81,25 @@ export async function getHolidays(country, year) {
         });
     } catch (error) {
         console.error(error);
+
+		errorPopup.style.opacity = 1;
+		errorPopup.style.visibility = "visible";
+
+		closePopup.addEventListener('click', () => {
+			errorPopup.style.opacity = 0;
+			errorPopup.style.visibility = "hidden";
+		});
+
+		closePopupBtn.addEventListener('click', () => {
+			errorPopup.style.opacity = 0;
+			errorPopup.style.visibility = "hidden";
+		});
+
+		errorPopup.addEventListener("click", (event) => {
+            if (event.target !== errorPopup) {
+                errorPopup.style.opacity = 0;
+                errorPopup.style.visibility = "hidden";
+            }
+        });
     }
 }
