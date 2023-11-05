@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holly</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <script defer src="./js/script.js"></script>
+    <script defer src="./js/index.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -54,7 +54,7 @@
                     </select><br>
                 </div>
                 <div class="count">
-                    <button class="count__button" disabled>Count</button>
+                    <button class="count__button" disabled>COUNT</button>
                 </div>
             </div>
             <div class="result result-date result_active">
@@ -74,9 +74,58 @@
             </div>
         </div>
         <div class="tab-holiday" hidden>
-            <div class="settings"></div>
-            <div class="result result-holiday result_active"></div>
+            <div class="settings">
+                <div class="title-form">
+                    <img src="assets/icon-settings.svg" alt="settings-icon">
+                    <span>Settings</span>
+                </div>
+                <div class="select-options select-options_holidays">
+                    <label for="selectCountry">Select country</label>
+                    <select id="selectCountry" name="selectCountry">
+                        <option value="" selected disabled></option>
+                    </select>
+        
+                    <label for="selectYear">Select year</label>
+                    <select id="selectYear" name="selectYear" disabled>
+                    </select><br>
+                </div>
+                <div class="show">
+                    <button class="show__button" disabled>SHOW</button>
+                </div>       
+            </div>
+            <div class="result result-holiday result_active">
+                <div class="title-form">
+                    <img src="assets/icon-check.svg" alt="result-icon">
+                    <span>Result</span>
+                </div>
+                <div class="result-header">
+                    <div class="result__date">
+                        <span>Date</span>
+                        <span class="arrow" data-direction="<"></span>
+                    </div>
+                    <span>Holiday</span>
+                </div>
+                <ul class="result-holidays">
+                </ul>
+            </div>
         </div>
     </main>
+    <div class="error-popup">
+        <div class="error-popup__body">
+            <div class="error-popup__content">
+                <a href="#" class="error-popup__close">
+                    <img src="assets/icon-close.svg" alt="close-button">
+                </a>
+                <div class="error-popup__img">
+                    <img src="assets/icon-warning.svg" alt="warning-icon">
+                </div>
+                <h2 class="error-popup__title">Oops! An Error Occurred</h2>
+                <p class="error-popup__text">Please try again later</p>
+                <div class="error-popup__link">
+                    <a href="#" class="error-popup__btn">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
