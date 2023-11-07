@@ -92,3 +92,13 @@ export function getDurationBetweenTimes(startDateValue, endDateValue, dayOption,
 
     return `${result} ${normalizeDimension(result, dimension)}`;
 }
+
+export const getYears = () => {
+    let years = [];
+
+    for(let year = 2001; year <= 2049; year++) {
+        years.push(year);
+    }
+    
+    return years;
+}

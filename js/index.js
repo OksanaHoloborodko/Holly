@@ -1,6 +1,7 @@
 import { getResultsFromStorage, setResultsToStorage } from './storage.js';
-import { getNormalizeDate, addWeek, addMonth, getDurationBetweenTimes } from './date.js';
-import { getCountries, getHolidays, holidaysData } from './requests.js';
+import { getNormalizeDate, addWeek, addMonth, getDurationBetweenTimes, getYears } from './date.js';
+import { getCountries, getHolidays, holidaysData, errorPopup } from './api.js';
+import { sortByDate } from './utils.js';
 
 const startDate = document.getElementById('startDate');
 const endDate = document.getElementById('endDate');
@@ -18,6 +19,8 @@ const showBtn = document.querySelector('.show__button');
 const sortBtn = document.querySelector('.arrow');
 const sortDate = document.querySelector('.result__date');
 const resultHolidays = document.querySelector('.result-holidays');
+const closePopup = document.querySelector('.error-popup__close');
+const closePopupBtn = document.querySelector('.error-popup__link');
 let isCountryLoad = false;
 
 const changeTab = (event) => {
@@ -136,8 +139,9 @@ const selectCountry = () => {
 
 const renderYearsList = () => {
     const defaultYear = (new Date()).getFullYear();
+    const years = getYears();
 
-    for(let year = 2001; year <= 2049; year++) {
+    for (const year of years) {
         const optionYear = document.createElement("option");
         optionYear.text = year;
         optionYear.value = year;
@@ -158,26 +162,7 @@ const showHolidays = () => {
     getHolidays(countryValue, yearValue);
 }
 
-function sortByDate(direction) {
-	if(direction === '>') {
-        return (a, b) => {
-            return (new Date(a.date)) - (new Date(b.date));
-        };
-    } else if(direction === '<') {
-        return (a, b) => {
-            return (new Date(b.date)) - (new Date(a.date));
-        };
-    }
-}
-
-const showSortedHolidays = () => {
-    const direction = sortBtn.getAttribute('data-direction');
-    sortBtn.setAttribute('data-direction', direction === '>' ? '<' : '>');
-
-    sortBtn.style.transform = direction === '<' ? 'rotate(180deg)' : 'rotate(0deg)';
-
-    holidaysData.sort(sortByDate(direction));
-
+export const renderHolidays = () => {
     resultHolidays.innerHTML = '';
 
     holidaysData.forEach(holiday => {
@@ -196,6 +181,22 @@ const showSortedHolidays = () => {
     });
 }
 
+const showSortedHolidays = () => {
+    const direction = sortBtn.getAttribute('data-direction');
+    sortBtn.setAttribute('data-direction', direction === '>' ? '<' : '>');
+
+    sortBtn.style.transform = direction === '<' ? 'rotate(180deg)' : 'rotate(0deg)';
+
+    holidaysData.sort(sortByDate(direction));
+
+    renderHolidays();
+}
+
+const closeErrorPopup = () => {
+    errorPopup.style.opacity = 0;
+    errorPopup.style.visibility = "hidden";
+}
+
 renderResults();
 renderYearsList();
 
@@ -207,3 +208,5 @@ countBtn.addEventListener('click', showResults);
 countriesList.addEventListener('change', selectCountry);
 showBtn.addEventListener('click', showHolidays);
 sortDate.addEventListener('click', showSortedHolidays);
+closePopup.addEventListener('click', closeErrorPopup);
+closePopupBtn.addEventListener('click', closeErrorPopup);
