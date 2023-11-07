@@ -1,6 +1,6 @@
 import { getResultsFromStorage, setResultsToStorage } from './storage.js';
 import { getNormalizeDate, addWeek, addMonth, getDurationBetweenTimes, getYears } from './date.js';
-import { getCountries, getHolidays, holidaysData, errorPopup } from './api.js';
+import { getCountries, getHolidays } from './api.js';
 import { sortByDate } from './utils.js';
 
 const startDate = document.getElementById('startDate');
@@ -19,9 +19,11 @@ const showBtn = document.querySelector('.show__button');
 const sortBtn = document.querySelector('.arrow');
 const sortDate = document.querySelector('.result__date');
 const resultHolidays = document.querySelector('.result-holidays');
+const errorPopup = document.querySelector('.error-popup');
 const closePopup = document.querySelector('.error-popup__close');
 const closePopupBtn = document.querySelector('.error-popup__link');
 let isCountryLoad = false;
+let holidaysData = [];
 
 const changeTab = (event) => {
     const tabButtons = document.querySelectorAll('.tab__button');
@@ -41,7 +43,7 @@ const changeTab = (event) => {
         tabDate.hidden = true;
         tabHoliday.hidden = false;
         if(!isCountryLoad) {
-            getCountries();
+            showCountries();
         }
         isCountryLoad = true;
     }
@@ -132,6 +134,24 @@ const showResults = () => {
     showDurationResults(startDateValue, endDateValue, dayOption, dimension);
 }
 
+async function showCountries() {
+    try {
+        const countries = await getCountries();
+        
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country['iso-3166'];
+            option.text = country.country_name;
+            countriesList.appendChild(option);
+        });
+    } catch (error) {
+        console.error(error);
+
+		errorPopup.style.opacity = 1;
+		errorPopup.style.visibility = "visible";
+    }
+}
+
 const selectCountry = () => {
     yearsList.removeAttribute('disabled');
     showBtn.removeAttribute("disabled");
@@ -153,16 +173,34 @@ const renderYearsList = () => {
     }
 }
 
-const showHolidays = () => {
-    const countryValue = countriesList.value;
-    const yearValue = yearsList.value;
-    sortBtn.setAttribute('data-direction', '<');
-    sortBtn.style = "";
+async function showHolidays() {
+    try {
+        const countryValue = countriesList.value;
+        const yearValue = yearsList.value;
+        sortBtn.setAttribute('data-direction', '<');
+        sortBtn.style = "";
 
-    getHolidays(countryValue, yearValue);
+        const holidays = await getHolidays(countryValue, yearValue);
+        
+        holidaysData = holidays.map(holiday => ({
+            date: holiday.date.iso.split('T')[0],
+            name: holiday.name
+        }));
+
+        const resultBlock = document.querySelector('.result-holiday');
+
+        resultBlock.classList.remove('result');
+
+        renderHolidays();
+    } catch (error) {
+        console.error(error);
+
+		errorPopup.style.opacity = 1;
+		errorPopup.style.visibility = "visible";
+    }
 }
 
-export const renderHolidays = () => {
+const renderHolidays = () => {
     resultHolidays.innerHTML = '';
 
     holidaysData.forEach(holiday => {
