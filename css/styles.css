@@ -16,7 +16,7 @@
     font-size: 10px;
 }
 
-ul, li, span, h1, h2, button {
+ul, li, span, h1, h2, button, a {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -206,12 +206,12 @@ input[type="date"][disabled] {
     outline: none;
 }
 
-.count {
+.count, .show {
     display: flex;
     justify-content: center;
 }
 
-.count__button {
+.count__button, .show__button {
     font-family: var(--main-font);
     font-size: 1.6rem;
     font-weight: 500;
@@ -224,19 +224,19 @@ input[type="date"][disabled] {
     cursor: pointer;
 }
 
-.count__button[disabled] {
+.count__button[disabled], .show__button[disabled] {
     background-color: var(--font-primary-color);
     border: 0.15rem solid var(--font-primary-color);
     opacity: 0.9;
 }
 
-.count__button[disabled]:hover {
+.count__button[disabled]:hover, .show__button[disabled]:hover {
     background-color: var(--font-primary-color);
     border: 0.15rem solid var(--font-primary-color);
     opacity: 0.9;
 }
 
-.count__button:hover {
+.count__button:hover, .show__button:hover {
     background-color: var(--accent-second-color);
     border: 0.15rem solid var(--accent-second-color);
 }
@@ -265,6 +265,18 @@ h2 {
     font-size: 1.8rem;
     color: var(--accent-primary-color);
     margin: 2rem 0;
+}
+
+.result-header > div {
+    display: flex;
+    align-items: center;
+}
+
+.result-header > div > span {
+    font-family: var(--main-font);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--font-primary-color);
 }
 
 .result-header > span {
@@ -299,7 +311,102 @@ h2 {
 }
 
 .select-options_holidays {
-    margin: 0 0;
+    margin: 0 0 2rem;
+}
+
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid var(--font-primary-color);
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.result__date > span {
+    cursor: pointer;
+}
+
+.error-popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease 0s;
+}
+
+.error-popup__body {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.error-popup__content {
+    background-color: #fafafa;
+    border: none;
+    border-radius: 1rem;
+    max-width: 80rem;
+    padding: 3rem;
+    position: relative;
+}
+
+.error-popup__close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.error-popup__img {
+    display: flex;
+    justify-content: center;
+}
+
+.error-popup__title {
+    text-align: center;
+    font-family: var(--main-font);
+    font-size: 2rem;
+    color: var(--accent-primary-color);
+    margin: 0.5rem 0;
+}
+
+.error-popup__text {
+    text-align: center;
+    font-family: var(--main-font);
+    font-size: 1.6rem;
+    color: var(--font-primary-color);
+    margin-bottom: 1rem;
+}
+
+.error-popup__link {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.error-popup__btn {
+    font-family: var(--main-font);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 130%;
+    color: var(--font-second-color);
+    background-color: var(--accent-primary-color);
+    border: 0.15rem solid var(--accent-primary-color);
+    border-radius: 1rem;
+    padding: 0.5rem 4rem;
+    cursor: pointer;
+}
+
+.error-popup__btn:hover {
+    background-color: var(--accent-second-color);
+    border: 0.15rem solid var(--accent-second-color);
 }
 
 @media screen and (max-width: 1300px) {
@@ -403,6 +510,10 @@ h2 {
     h2 {
         font-size: 1.6rem;
         margin: 1rem 0;
+    }
+
+    .result-header > div > span {
+        font-size: 1.4rem;
     }
 
     .result-header > span {
