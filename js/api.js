@@ -1,7 +1,8 @@
 const API_KEY = 'YOj2k4kWDhu3eCR9VoiiL9saL9qFU3GQ';
+const API_URL = 'https://calendarific.com/api/v2';
 
 export async function getCountries() {
-    const response = await fetch(`https://calendarific.com/api/v2/countries?api_key=${API_KEY}`);
+    const response = await fetch(`${API_URL}/countries?api_key=${API_KEY}`);
 
     if (!response.ok) {
         throw new Error(`Помилка запиту: ${response.status}`);
@@ -13,7 +14,7 @@ export async function getCountries() {
 }
 
 export async function getHolidays(country, year) {
-    const response = await fetch(`https://calendarific.com/api/v2/holidays?&api_key=${API_KEY}&country=${country}&year=${year}`);
+    const response = await fetch(`${API_URL}/holidays?&api_key=${API_KEY}&country=${country}&year=${year}`);
     
     if (!response.ok) {
         throw new Error(`Помилка запиту: ${response.status}`);
