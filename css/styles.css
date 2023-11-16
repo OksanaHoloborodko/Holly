@@ -24,7 +24,7 @@ ul, li, span, h1, h2, button, a {
 }
 
 body {
-    background: no-repeat url('/assets/dots.svg') left 35% fixed, no-repeat url('/assets/dots.svg') right 85% fixed;
+    background: no-repeat url('../assets/dots.svg') left 35% fixed, no-repeat url('../assets/dots.svg') right 85% fixed;
     background-color: var(--background-color);
 }
 
