@@ -18,6 +18,7 @@ const yearsList = document.getElementById('selectYear');
 const showBtn = document.querySelector('.show__button');
 const sortBtn = document.querySelector('.arrow');
 const sortDate = document.querySelector('.result__date');
+const resultHolidayBlock = document.querySelector('.result-holiday');
 const resultHolidays = document.querySelector('.result-holidays');
 const errorPopup = document.querySelector('.error-popup');
 const closePopup = document.querySelector('.error-popup__close');
@@ -197,6 +198,8 @@ async function showHolidays() {
 
 		errorPopup.style.opacity = 1;
 		errorPopup.style.visibility = "visible";
+
+        resultHolidayBlock.classList.add('result');
     }
 }
 
