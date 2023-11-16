@@ -524,10 +524,20 @@ h2 {
         align-items: center;
         gap: 1.5rem;
         padding: 0.7rem 0;
-        word-wrap: ' ';
+        word-wrap: break-word;
     }
 
     .select-options_holidays {
         margin: 0 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .result-value span:first-child {
+        flex: 2;
+    }
+
+    .result-holidays .result-value span:first-child {
+        flex: 1;
     }
 }
